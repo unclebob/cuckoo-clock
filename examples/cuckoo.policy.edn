@@ -1,0 +1,10 @@
+{:title "Cuckoo"
+ :src "src"
+ :prefix ""
+ :lang :typescript
+ :out "examples/cuckoo.edn"
+ :hierarchical true
+ :order [main face calendar time strike hands motion audio]
+ :levels [[calendar time strike hands motion audio]
+          [face]
+          [main]]}

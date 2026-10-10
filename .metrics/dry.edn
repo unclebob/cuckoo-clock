@@ -1,0 +1,128 @@
+{:candidates [
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 11, :end-line 16}
+  :right {:file "src/audio/cuckoo.ts", :start-line 14, :end-line 19}
+  :left-nodes 38
+  :right-nodes 38}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 11, :end-line 16}
+  :right {:file "src/audio/tic.ts", :start-line 6, :end-line 11}
+  :left-nodes 38
+  :right-nodes 38}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 11, :end-line 16}
+  :right {:file "src/audio/tok.ts", :start-line 6, :end-line 11}
+  :left-nodes 38
+  :right-nodes 38}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 18, :end-line 23}
+  :right {:file "src/audio/cuckoo.ts", :start-line 21, :end-line 26}
+  :left-nodes 54
+  :right-nodes 54}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 18, :end-line 23}
+  :right {:file "src/audio/tic.ts", :start-line 28, :end-line 33}
+  :left-nodes 54
+  :right-nodes 54}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 18, :end-line 23}
+  :right {:file "src/audio/tok.ts", :start-line 30, :end-line 35}
+  :left-nodes 54
+  :right-nodes 54}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 25, :end-line 42}
+  :right {:file "src/audio/cuckoo.ts", :start-line 28, :end-line 45}
+  :left-nodes 178
+  :right-nodes 178}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/chime.ts", :start-line 88, :end-line 107}
+  :right {:file "src/audio/cuckoo.ts", :start-line 90, :end-line 109}
+  :left-nodes 136
+  :right-nodes 136}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/cuckoo.ts", :start-line 14, :end-line 19}
+  :right {:file "src/audio/tic.ts", :start-line 6, :end-line 11}
+  :left-nodes 38
+  :right-nodes 38}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/cuckoo.ts", :start-line 14, :end-line 19}
+  :right {:file "src/audio/tok.ts", :start-line 6, :end-line 11}
+  :left-nodes 38
+  :right-nodes 38}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/cuckoo.ts", :start-line 21, :end-line 26}
+  :right {:file "src/audio/tic.ts", :start-line 28, :end-line 33}
+  :left-nodes 54
+  :right-nodes 54}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/cuckoo.ts", :start-line 21, :end-line 26}
+  :right {:file "src/audio/tok.ts", :start-line 30, :end-line 35}
+  :left-nodes 54
+  :right-nodes 54}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/cuckoo.ts", :start-line 111, :end-line 115}
+  :right {:file "src/main.ts", :start-line 137, :end-line 141}
+  :left-nodes 64
+  :right-nodes 64}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/tic.ts", :start-line 6, :end-line 11}
+  :right {:file "src/audio/tok.ts", :start-line 6, :end-line 11}
+  :left-nodes 38
+  :right-nodes 38}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/tic.ts", :start-line 28, :end-line 33}
+  :right {:file "src/audio/tok.ts", :start-line 30, :end-line 35}
+  :left-nodes 54
+  :right-nodes 54}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/audio/tic.ts", :start-line 62, :end-line 75}
+  :right {:file "src/audio/tok.ts", :start-line 64, :end-line 77}
+  :left-nodes 90
+  :right-nodes 90}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/calendar/presidentsDay.ts", :start-line 1, :end-line 10}
+  :right {:file "src/calendar/thanksgiving.ts", :start-line 1, :end-line 10}
+  :left-nodes 139
+  :right-nodes 139}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/face/dial.ts", :start-line 217, :end-line 228}
+  :right {:file "src/face/windows.ts", :start-line 4, :end-line 15}
+  :left-nodes 112
+  :right-nodes 112}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/hands/hourHand.ts", :start-line 9, :end-line 33}
+  :right {:file "src/hands/minuteHand.ts", :start-line 9, :end-line 33}
+  :left-nodes 340
+  :right-nodes 340}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/hands/hourHand.ts", :start-line 9, :end-line 33}
+  :right {:file "src/hands/secondHand.ts", :start-line 9, :end-line 33}
+  :left-nodes 340
+  :right-nodes 340}
+ {:score 1.0
+  :language "typescript"
+  :left {:file "src/hands/minuteHand.ts", :start-line 9, :end-line 33}
+  :right {:file "src/hands/secondHand.ts", :start-line 9, :end-line 33}
+  :left-nodes 340
+  :right-nodes 340}
+]}

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+target/
+
+# BEGIN UML-VIEWER
+.uml-viewer/
+uml-viewer-log.txt
+# END UML-VIEWER
