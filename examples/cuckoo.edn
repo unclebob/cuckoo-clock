@@ -12,20 +12,33 @@
  [{:from :main, :to :hands.secondHand, :kind :dependency}
   {:from :calendar.holiday, :to :calendar.easter, :kind :dependency}
   {:from :main, :to :audio.chime, :kind :dependency}
+  {:from :hands.secondHand, :to :hands.ease, :kind :dependency}
+  {:from :audio.chime, :to :audio.player, :kind :dependency}
   {:from :calendar.holiday, :to :calendar.thanksgiving, :kind :dependency}
   {:from :main, :to :face.dial, :kind :dependency}
+  {:from :audio.tok, :to :audio.player, :kind :dependency}
   {:from :main, :to :hands.minuteHand, :kind :dependency}
+  {:from :audio.cuckoo, :to :audio.player, :kind :dependency}
   {:from :main, :to :motion.pendulum, :kind :dependency}
   {:from :face.windows, :to :calendar.moon, :kind :dependency}
+  {:from :audio.rod, :to :audio.player, :kind :dependency}
   {:from :face.windows, :to :calendar.holiday, :kind :dependency}
   {:from :calendar.holiday, :to :calendar.presidentsDay, :kind :dependency}
+  {:from :audio.tic, :to :audio.player, :kind :dependency}
+  {:from :calendar.presidentsDay, :to :calendar.nthWeekday, :kind :dependency}
   {:from :main, :to :audio.tic, :kind :dependency}
   {:from :face.dial, :to :face.windows, :kind :dependency}
+  {:from :audio.chime, :to :audio.rod, :kind :dependency}
   {:from :main, :to :time.advance, :kind :dependency}
+  {:from :calendar.thanksgiving, :to :calendar.nthWeekday, :kind :dependency}
   {:from :main, :to :audio.tok, :kind :dependency}
   {:from :main, :to :strike.strike, :kind :dependency}
+  {:from :face.dial, :to :face.element, :kind :dependency}
+  {:from :hands.hourHand, :to :hands.ease, :kind :dependency}
   {:from :main, :to :hands.hourHand, :kind :dependency}
-  {:from :main, :to :audio.cuckoo, :kind :dependency}],
+  {:from :main, :to :audio.cuckoo, :kind :dependency}
+  {:from :hands.minuteHand, :to :hands.ease, :kind :dependency}
+  {:from :face.windows, :to :face.element, :kind :dependency}],
  :classes
  [{:ns "audio.chime",
    :name "Chime",
@@ -49,6 +62,29 @@
    :level 0,
    :lang :typescript,
    :id :audio.cuckoo}
+  {:ns "audio.player",
+   :name "Player",
+   :file "src/audio/player.ts",
+   :ops
+   [{:name "audioContext", :text "audioContext"}
+    {:name "resumeContext", :text "resumeContext"}
+    {:name "fetchClip", :text "fetchClip"}
+    {:name "loadClip", :text "loadClip"}
+    {:name "finishVoices", :text "finishVoices"}
+    {:name "scheduleRepeats", :text "scheduleRepeats"}
+    {:name "stopVoices", :text "stopVoices"}
+    {:name "startVoice", :text "startVoice"}
+    {:name "stopVoice", :text "stopVoice"}],
+   :level 0,
+   :lang :typescript,
+   :id :audio.player}
+  {:ns "audio.rod",
+   :name "Rod",
+   :file "src/audio/rod.ts",
+   :ops [{:name "loadRod", :text "loadRod"} {:name "strikeRod", :text "strikeRod"}],
+   :level 0,
+   :lang :typescript,
+   :id :audio.rod}
   {:ns "audio.tic",
    :name "Tic",
    :file "src/audio/tic.ts",
@@ -92,6 +128,13 @@
    :level 0,
    :lang :typescript,
    :id :calendar.moon}
+  {:ns "calendar.nthWeekday",
+   :name "NthWeekday",
+   :file "src/calendar/nthWeekday.ts",
+   :ops [{:name "nthWeekday", :text "nthWeekday"}],
+   :level 0,
+   :lang :typescript,
+   :id :calendar.nthWeekday}
   {:ns "calendar.presidentsDay",
    :name "PresidentsDay",
    :file "src/calendar/presidentsDay.ts",
@@ -109,10 +152,20 @@
   {:ns "face.dial",
    :name "Dial",
    :file "src/face/dial.ts",
-   :ops [{:name "drawDial", :text "drawDial"}],
+   :ops
+   [{:name "chapterMark", :text "chapterMark"}
+    {:name "nextMotion", :text "nextMotion"}
+    {:name "drawDial", :text "drawDial"}],
    :level 1,
    :lang :typescript,
    :id :face.dial}
+  {:ns "face.element",
+   :name "Element",
+   :file "src/face/element.ts",
+   :ops [{:name "element", :text "element"}],
+   :level 1,
+   :lang :typescript,
+   :id :face.element}
   {:ns "face.windows",
    :name "Windows",
    :file "src/face/windows.ts",
@@ -120,6 +173,13 @@
    :level 1,
    :lang :typescript,
    :id :face.windows}
+  {:ns "hands.ease",
+   :name "Ease",
+   :file "src/hands/ease.ts",
+   :ops [{:name "easeHand", :text "easeHand"}],
+   :level 0,
+   :lang :typescript,
+   :id :hands.ease}
   {:ns "hands.hourHand",
    :name "HourHand",
    :file "src/hands/hourHand.ts",
@@ -165,7 +225,11 @@
   {:ns "time.advance",
    :name "Advance",
    :file "src/time/advance.ts",
-   :ops [{:name "advance", :text "advance"}],
+   :ops
+   [{:name "sameTime", :text "sameTime"}
+    {:name "clockMoved", :text "clockMoved"}
+    {:name "steppedOrRead", :text "steppedOrRead"}
+    {:name "advance", :text "advance"}],
    :level 0,
    :lang :typescript,
    :id :time.advance}]}

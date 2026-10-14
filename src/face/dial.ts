@@ -1,3 +1,4 @@
+import { element } from "./element";
 import { drawWindow } from "./windows";
 
 export type BirdMode = "home" | "out" | "singing";
@@ -21,6 +22,49 @@ let doorTarget = 0;
 let birdDrop = 0;
 let birdTarget = 0;
 let singing = false;
+
+export function chapterMark(mark: number): { inner: number; stroke: string; width: string } {
+  if (mark % 5 === 0) {
+    return { inner: 124, stroke: "#5c4318", width: "2.4" };
+  }
+  return { inner: 136, stroke: "#8a7040", width: "1" };
+}
+
+export function nextMotion(
+  openness: number,
+  doorGoal: number,
+  drop: number,
+  perch: number,
+  singingNow: boolean,
+  nowMs: number,
+): {
+  doorOpenness: number;
+  birdDrop: number;
+  leftTransform: string;
+  rightTransform: string;
+  birdTransform: string;
+  beakOpen: string;
+  beakClosed: string;
+} {
+  let doors = openness + (doorGoal - openness) * 0.14;
+  if (Math.abs(doorGoal - doors) < 0.004) {
+    doors = doorGoal;
+  }
+  const scale = 1 - doors * 0.9;
+  const nextDrop = drop + (perch - drop) * 0.16;
+  const bob = singingNow ? Math.sin(nowMs / 155) * 5 : 0;
+  const tilt = singingNow ? Math.sin(nowMs / 155) * 8 : 0;
+  const mouth = singingNow && Math.sin(nowMs / 155) > -0.15 ? "1" : "0";
+  return {
+    doorOpenness: doors,
+    birdDrop: nextDrop,
+    leftTransform: `translate(174 0) scale(${scale} 1) translate(-174 0)`,
+    rightTransform: `translate(386 0) scale(${scale} 1) translate(-386 0)`,
+    birdTransform: `translate(280 ${246 + nextDrop + bob}) rotate(${tilt})`,
+    beakOpen: mouth,
+    beakClosed: mouth === "1" ? "0" : "1",
+  };
+}
 
 export function drawDial(host: Element): ClockScene {
   host.innerHTML = markup;
@@ -65,20 +109,14 @@ export function drawDial(host: Element): ClockScene {
       birdTarget = mode === "home" ? 0 : 76;
     },
     step(nowMs: number): void {
-      doorOpenness += (doorTarget - doorOpenness) * 0.14;
-      if (Math.abs(doorTarget - doorOpenness) < 0.004) {
-        doorOpenness = doorTarget;
-      }
-      const scale = 1 - doorOpenness * 0.9;
-      leftDoor.setAttribute("transform", `translate(174 0) scale(${scale} 1) translate(-174 0)`);
-      rightDoor.setAttribute("transform", `translate(386 0) scale(${scale} 1) translate(-386 0)`);
-      birdDrop += (birdTarget - birdDrop) * 0.16;
-      const bob = singing ? Math.sin(nowMs / 155) * 5 : 0;
-      const tilt = singing ? Math.sin(nowMs / 155) * 8 : 0;
-      bird.setAttribute("transform", `translate(280 ${246 + birdDrop + bob}) rotate(${tilt})`);
-      const mouth = singing && Math.sin(nowMs / 155) > -0.15 ? "1" : "0";
-      beakOpen.setAttribute("opacity", mouth);
-      beakClosed.setAttribute("opacity", mouth === "1" ? "0" : "1");
+      const motion = nextMotion(doorOpenness, doorTarget, birdDrop, birdTarget, singing, nowMs);
+      doorOpenness = motion.doorOpenness;
+      birdDrop = motion.birdDrop;
+      leftDoor.setAttribute("transform", motion.leftTransform);
+      rightDoor.setAttribute("transform", motion.rightTransform);
+      bird.setAttribute("transform", motion.birdTransform);
+      beakOpen.setAttribute("opacity", motion.beakOpen);
+      beakClosed.setAttribute("opacity", motion.beakClosed);
     },
   };
 }
@@ -86,18 +124,17 @@ export function drawDial(host: Element): ClockScene {
 function drawChapter(dial: SVGGElement): void {
   for (let mark = 0; mark < 60; mark += 1) {
     const theta = (mark * Math.PI) / 30;
-    const long = mark % 5 === 0;
-    const inner = long ? 124 : 136;
+    const style = chapterMark(mark);
     const outer = 147;
     element(
       "line",
       {
-        x1: String(Math.sin(theta) * inner),
-        y1: String(-Math.cos(theta) * inner),
+        x1: String(Math.sin(theta) * style.inner),
+        y1: String(-Math.cos(theta) * style.inner),
         x2: String(Math.sin(theta) * outer),
         y2: String(-Math.cos(theta) * outer),
-        stroke: long ? "#5c4318" : "#8a7040",
-        "stroke-width": long ? "2.4" : "1",
+        stroke: style.stroke,
+        "stroke-width": style.width,
         "stroke-linecap": "round",
       },
       dial,
@@ -212,19 +249,6 @@ function rose(parent: SVGElement, x: number, y: number, scale: number): void {
     );
   }
   element("circle", { r: "3", fill: "#e6b34a", stroke: "#a67c28", "stroke-width": "0.4" }, group);
-}
-
-function element(
-  name: string,
-  attributes: Record<string, string>,
-  parent: Element,
-): SVGElement {
-  const node = document.createElementNS("http://www.w3.org/2000/svg", name);
-  for (const [key, value] of Object.entries(attributes)) {
-    node.setAttribute(key, value);
-  }
-  parent.append(node);
-  return node;
 }
 
 function required(svg: SVGSVGElement, selector: string): SVGGElement {

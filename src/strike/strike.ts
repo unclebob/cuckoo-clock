@@ -13,9 +13,6 @@ function onQuarterBoundary(minute: number, second: number): boolean {
   return second === 0 && (minute === 0 || minute === 15 || minute === 30 || minute === 45);
 }
 
-// The first call is the moment the page opens. A quarter that has already
-// arrived is marked as heard and is not played again. Later calls announce a
-// quarter only when the clock arrives on it.
 export function strike(
   hour: number,
   minute: number,

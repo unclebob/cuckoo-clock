@@ -1,6 +1,10 @@
-https://commons.wikimedia.org/wiki/File:Westminster-and-one-o-clock.ogg
-Direct file: https://upload.wikimedia.org/wikipedia/commons/c/c5/Westminster-and-one-o-clock.ogg
+The quarters are synthesized. Each note is a struck rod: a hammer click, then partials that die away, the lowest one slowest.
 
-Public domain. Released by the author, Wikipit, on 17 December 2005.
-westminster.ogg is that recording unchanged: the Westminster quarters and the one o'clock strike of a Kieninger rod gong.
-westminster.wav is the first quarter phrase from that recording, from 1.68 seconds to 5.22 seconds, before the later phrases and the hour strike.
+The rods are the usual Big Ben pitches: G-sharp4, F-sharp4, E4, and B3.
+
+First quarter: G-sharp, F-sharp, E, B.
+Second quarter: E, G-sharp, F-sharp, B, then E, F-sharp, G-sharp, E.
+Third quarter: G-sharp, E, F-sharp, B, then B, F-sharp, G-sharp, E, then G-sharp, F-sharp, E, B.
+Hour: E, G-sharp, F-sharp, B, then E, F-sharp, G-sharp, E, then G-sharp, E, F-sharp, B, then B, F-sharp, G-sharp, E.
+
+Notes inside a phrase are 0.72 seconds apart. The next phrase starts 3.52 seconds after the previous phrase. The cuckoo strikes the hour after the chime.

@@ -1,4 +1,3 @@
-// Anonymous Gregorian algorithm. Month is 3 for March or 4 for April.
 export function easter(year: number): { month: number; day: number } {
   const a = year % 19;
   const b = Math.floor(year / 100);

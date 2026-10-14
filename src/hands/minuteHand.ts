@@ -1,33 +1,8 @@
-let angle = 0;
-let placed = false;
-let lastMs = 0;
+import { easeHand, type HandMotion } from "./ease";
 
-function clockMs(): number {
-  return Date.now();
-}
+const motion: HandMotion = { angle: 0, placed: false, lastMs: 0 };
 
-export function minuteHand(minute: number): { angle: number; transform: string } {
-  const target = (((minute % 60) + 60) % 60) * 6;
-  const now = clockMs();
-  if (!placed) {
-    angle = target;
-    placed = true;
-    lastMs = now;
-    return { angle, transform: `rotate(${angle})` };
-  }
-  const elapsed = Math.min(0.05, Math.max(0, (now - lastMs) / 1000));
-  lastMs = now;
-  let sweep = target - angle;
-  sweep = ((sweep % 360) + 360) % 360;
-  if (sweep > 359.99) {
-    sweep = 0;
-  }
-  const eased = Math.min(sweep, 36 * elapsed);
-  const clamped = Math.min(eased, 2);
-  if (sweep < 0.05) {
-    angle = target;
-  } else {
-    angle = (angle + clamped) % 360;
-  }
-  return { angle, transform: `rotate(${angle})` };
+export function minuteHand(minute: number, second = 0): { angle: number; transform: string } {
+  const position = minute + second / 60;
+  return easeHand(motion, (((position % 60) + 60) % 60) * 6, 36, 2);
 }

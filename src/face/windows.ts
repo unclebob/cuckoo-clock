@@ -1,18 +1,6 @@
 import { holiday } from "../calendar/holiday";
 import { moon } from "../calendar/moon";
-
-function element(
-  name: string,
-  attributes: Record<string, string>,
-  parent: SVGElement,
-): SVGElement {
-  const node = document.createElementNS("http://www.w3.org/2000/svg", name);
-  for (const [key, value] of Object.entries(attributes)) {
-    node.setAttribute(key, value);
-  }
-  parent.append(node);
-  return node;
-}
+import { element } from "./element";
 
 export function drawWindow(parent: SVGGElement): { update(date: Date): void } {
   element(

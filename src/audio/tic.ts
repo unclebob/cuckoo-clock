@@ -1,17 +1,10 @@
-let ctx: AudioContext | null = null;
-let buffer: AudioBuffer | null = null;
-let source: AudioBufferSourceNode | null = null;
-let gain: GainNode | null = null;
+import { audioContext, resumeContext, startVoice, stopVoice, type Voice } from "./player";
 
-function audio(): AudioContext {
-  if (!ctx) {
-    ctx = new AudioContext();
-  }
-  return ctx;
-}
+let buffer: AudioBuffer | null = null;
+const voice: Voice = { source: null, gain: null };
 
 function click(): AudioBuffer {
-  const current = audio();
+  const current = audioContext();
   const seconds = 0.022;
   const length = Math.floor(current.sampleRate * seconds);
   const clickBuffer = current.createBuffer(1, length, current.sampleRate);
@@ -26,10 +19,7 @@ function click(): AudioBuffer {
 }
 
 export function unlockTic(): void {
-  const current = audio();
-  if (current.state !== "running") {
-    void current.resume();
-  }
+  resumeContext(audioContext());
 }
 
 export function loadTic(): void {
@@ -39,37 +29,15 @@ export function loadTic(): void {
 }
 
 export function playTic(): void {
-  const current = audio();
+  const current = audioContext();
   if (current.state !== "running") {
     return;
   }
   loadTic();
   stopTic();
-  const next = current.createBufferSource();
-  next.buffer = buffer;
-  const level = current.createGain();
-  const when = current.currentTime;
-  level.gain.setValueAtTime(0.0001, when);
-  level.gain.exponentialRampToValueAtTime(0.16, when + 0.003);
-  level.gain.exponentialRampToValueAtTime(0.0001, when + 0.022);
-  next.connect(level);
-  level.connect(current.destination);
-  next.start(when);
-  source = next;
-  gain = level;
+  startVoice(current, voice, buffer, 0.16, 0.003, 0.022);
 }
 
 export function stopTic(): void {
-  if (!source) {
-    return;
-  }
-  try {
-    source.stop();
-  } catch {
-    // The click has already ended.
-  }
-  source.disconnect();
-  gain?.disconnect();
-  source = null;
-  gain = null;
+  stopVoice(voice);
 }
